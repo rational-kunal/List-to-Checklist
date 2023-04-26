@@ -34,6 +34,14 @@ function addCheckboxTo(element) {
  */
 function convert() {
   getAllUnorderedListElements().forEach((unorderedListElement) => {
+    // Only convert the simple list tags.
+    // TODO: Check out for more generic fix.
+    // This works for my case (i.e. https://www.hackingwithswift.com/100) but there is no guarantee that this will work at other places as well.
+    // We need to fine tune the code on per case basis.
+    if (unorderedListElement.classList.length > 0) {
+      return
+    }
+
     // Set list type to none.
     // This will disable the bullet points.
     unorderedListElement.style.listStyle = 'none'
