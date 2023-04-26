@@ -24,7 +24,37 @@ async function setIsExtensionEnable(enable) {
   })
 }
 
+/**
+ * Returns whether current tab is opted-in.
+ * @returns {Promise<Boolean>}
+ */
+async function isCurrentTabOptedIn() {
+  const currentURL = location.href
+  const optedInURLs = await storage.getOptedInURLs()
+  return optedInURLs.find((inURL) => currentURL.startsWith(inURL)) !== undefined
+}
+
+/**
+ * Returns all opted-in URLs.
+ * @returns {Promise<Array<String>>}
+ */
+async function optedInURLs() {
+  const optedInURLs = await storage.getOptedInURLs()
+  return optedInURLs
+}
+
+/**
+ * Updates the opted-in URLs.
+ * @param {Array<String>} URLs
+ */
+async function updateOptedInURL(URLs) {
+  await storage.updateOptedInURL(URLs)
+}
+
 export default {
   isExtensionEnable,
   setIsExtensionEnable,
+  isCurrentTabOptedIn,
+  optedInURLs,
+  updateOptedInURL,
 }

@@ -1,4 +1,5 @@
 const EXTENSION_ENABLE_KEY = 'EXTENSION_ENABLE_KEY'
+const OPTED_IN_URL_LIST_KEY = 'OPTED_IN_URL_LIST_KEY'
 
 /**
  * Returns whether extension is enabled.
@@ -17,7 +18,26 @@ function setIsExtensionEnable(enable) {
   chrome.storage.local.set({ EXTENSION_ENABLE_KEY: enable })
 }
 
+/**
+ * Returns all opted-in URLs.
+ * @returns {Promise<Array<String>>}
+ */
+async function getOptedInURLs() {
+  const optedInURLsResult = await chrome.storage.local.get([OPTED_IN_URL_LIST_KEY])
+  return optedInURLsResult[OPTED_IN_URL_LIST_KEY] || []
+}
+
+/**
+ * Updates the opted-in URLs.
+ * @param {Array<String>} URLs
+ */
+async function updateOptedInURL(URLs) {
+  await chrome.storage.local.set({ OPTED_IN_URL_LIST_KEY: URLs })
+}
+
 export default {
   isExtensionEnable,
   setIsExtensionEnable,
+  getOptedInURLs,
+  updateOptedInURL,
 }
