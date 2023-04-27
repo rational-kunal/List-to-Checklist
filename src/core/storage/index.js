@@ -1,5 +1,6 @@
 const EXTENSION_ENABLE_KEY = 'EXTENSION_ENABLE_KEY'
 const OPTED_IN_URL_LIST_KEY = 'OPTED_IN_URL_LIST_KEY'
+const CHECKED_LIST_KEY = 'CHECKED_LIST_KEY'
 
 /**
  * Returns whether extension is enabled.
@@ -35,9 +36,29 @@ async function updateOptedInURL(URLs) {
   await chrome.storage.local.set({ OPTED_IN_URL_LIST_KEY: URLs })
 }
 
+/**
+ * Returns the content of the checked list.
+ * @returns {Promise<Set<String>>}
+ */
+async function getCheckedList() {
+  const checkedList = await chrome.storage.local.get([CHECKED_LIST_KEY])
+  return new Set(checkedList[CHECKED_LIST_KEY] || [])
+}
+
+/**
+ * Updates hhe checked list contents.
+ * @param {Set<String>} list
+ */
+async function updateCheckedList(list) {
+  const arrayList = Array.from(list)
+  await chrome.storage.local.set({ CHECKED_LIST_KEY: arrayList })
+}
+
 export default {
   isExtensionEnable,
   setIsExtensionEnable,
   getOptedInURLs,
   updateOptedInURL,
+  getCheckedList,
+  updateCheckedList,
 }
