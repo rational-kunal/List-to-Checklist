@@ -25,14 +25,19 @@ function addCheckboxTo(element) {
   const checkboxElement = document.createElement('input')
   checkboxElement.style.marginRight = '8px'
   checkboxElement.type = 'checkbox'
-  checkboxElement.checked = selector.isChecked(element.textContent)
 
+  if (selector.isChecked(element.textContent)) {
+    element.style.textDecoration = 'line-through'
+    checkboxElement.checked = selector.isChecked(element.textContent)
+  }
   element.insertBefore(checkboxElement, element.firstChild)
 
   checkboxElement.addEventListener('change', (event) => {
     event.target.checked
       ? selector.check(element.textContent)
       : selector.uncheck(element.textContent)
+
+    element.style.textDecoration = event.target.checked ? 'line-through' : ''
   })
 }
 
