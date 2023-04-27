@@ -1,10 +1,20 @@
+import '@fontsource/roboto/300.css'
+import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew'
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Container from '@mui/material/Container'
+import Paper from '@mui/material/Paper'
+import Stack from '@mui/material/Stack'
+import TextField from '@mui/material/TextField'
+import Typography from '@mui/material/Typography'
 import { useEffect, useState } from 'react'
+import DarkApp from '../DarkApp'
 import settings from '../core/settings'
-import './Options.css'
 
 function App() {
   const [isExtensionEnable, setIsExtensionEnable] = useState(false)
   const [inputURLs, setInputURLs] = useState([])
+  const [updateEnabled, setUpdateEnabled] = useState(false)
 
   useEffect(() => {
     settings.optedInURLs().then((URLs) => {
@@ -23,19 +33,60 @@ function App() {
 
   const updateTapHandler = () => {
     settings.updateOptedInURL(inputURLs.split(','))
+    setUpdateEnabled(false)
   }
 
+  const version = `v${chrome.runtime.getManifest().version}`
+
   return (
-    <main>
-      <button onClick={enableTapHandler}> {isExtensionEnable ? 'Disable' : 'Enable'} </button>
+    <DarkApp>
+      <Container maxWidth="sm">
+        <Box>
+          <Stack direction="column" spacing={1}>
+            <Typography variant="h1">List to Checklist</Typography>
 
-      <div>
-        <textarea value={inputURLs} onChange={(e) => setInputURLs(e.target.value)}></textarea>
-        <button onClick={updateTapHandler}> Update </button>
-      </div>
+            <Paper elevation={1} sx={{ padding: 1 }}>
+              <Button
+                variant="outlined"
+                size="large"
+                startIcon={<PowerSettingsNewIcon />}
+                color={isExtensionEnable ? 'error' : 'success'}
+                onClick={enableTapHandler}
+                fullWidth
+              >
+                {isExtensionEnable ? 'Disable' : 'Enable'}
+              </Button>
+            </Paper>
 
-      <sub>v 0.0.0</sub>
-    </main>
+            <Paper elevation={1} sx={{ padding: 1 }}>
+              <Stack direction="column" spacing={1}>
+                <TextField
+                  label="Opted in URLs"
+                  multiline
+                  rows={4}
+                  placeholder="https://www.example.com, https://www.example2.com"
+                  value={inputURLs}
+                  onChange={(e) => {
+                    setUpdateEnabled(true)
+                    setInputURLs(e.target.value)
+                  }}
+                />
+                <Button
+                  variant="outlined"
+                  size="medium"
+                  startIcon={<PowerSettingsNewIcon />}
+                  onClick={updateTapHandler}
+                  disabled={!updateEnabled}
+                >
+                  Update
+                </Button>
+              </Stack>
+            </Paper>
+            <Typography variant="subtitle">{version}</Typography>
+          </Stack>
+        </Box>
+      </Container>
+    </DarkApp>
   )
 }
 
