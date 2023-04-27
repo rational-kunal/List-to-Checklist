@@ -9,6 +9,7 @@ import { config } from './src/read_pages_folder.js'
 export default defineConfig(({ mode }) => {
   return {
     build: {
+      target: 'esnext',
       emptyOutDir: true,
       outDir: 'build',
       rollupOptions: {
