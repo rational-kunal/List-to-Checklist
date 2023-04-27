@@ -74,7 +74,6 @@ function App() {
                 <Button
                   variant="outlined"
                   size="medium"
-                  startIcon={<PowerSettingsNewIcon />}
                   onClick={updateTapHandler}
                   disabled={!updateEnabled}
                 >
