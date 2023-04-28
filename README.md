@@ -1,32 +1,29 @@
-# List to Checklist
-A Chrome extension that converts all list elements into checklist elements.
+# ✅ List to Checklist
 
-Normal | With the extension
-:-------------------------:|:-------------------------:
-![](https://user-images.githubusercontent.com/28783605/234849300-88fee350-f47a-4575-8ba6-91283b556ed9.png)  |  ![](https://user-images.githubusercontent.com/28783605/234849131-eae99228-e44e-4185-9ab2-22d87578e848.png)
+A Chrome extension that converts all list elements into checklist elements, making it easier to keep track of tasks and progress.
+
+Recently, I started #100DaysOfSwift and needed a checklist to keep track of my progress. This extension solves that problem by converting list elements to checklist elements.
+
+https://user-images.githubusercontent.com/28783605/235192773-0cefd184-5076-4e20-bfae-47c6500bb4b5.mov
 
 ## Installing
 
 1. Check if your `Node.js` version is >= **14**.
 2. Run `npm install` to install the dependencies.
 3. Build code by running command:
+
 ```shell
 $ npm build
 ```
+
 4. Enable 'Developer mode' in your Chrome browser.
 5. Click 'Load unpacked', and select the `list-to-checklist/build` folder
 
-# Motivation
-Recently, I started #100DaysOfSwift and needed a checklist to keep track of my progress. This extension solves that problem by converting list elements to checklist elements.
+## Features
 
-# Features
-1. Overall switch to enable and disable extension.
-2. Manual control over which websites to opt-in.
-3. Check/uncheck items on the list, which are stored locally.
-
-# Screenshots
-![](https://user-images.githubusercontent.com/28783605/234852651-42fedf02-dbde-4dc7-b387-1137ef074fac.png)
-![](https://user-images.githubusercontent.com/28783605/234857101-1acd00cc-c9f5-4f47-b00d-b301a1e8b590.png)
+- Overall switch to enable and disable extension.
+- Manual control over which websites to opt-in.
+- Check/uncheck items on the list, which will be stored locally.
 
 ---
 

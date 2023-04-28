@@ -1,8 +1,6 @@
 {
   "name": "list-to-checklist",
-  "version": "0.0.0",
   "author": "rational-kunal",
-  "description": "TODO: Description",
   "type": "module",
   "license": "MIT",
   "keywords": [
