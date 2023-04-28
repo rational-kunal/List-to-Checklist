@@ -6,7 +6,6 @@ let checkedLists = new Set()
 /** Populates the checked list. */
 async function populateCheckedList() {
   checkedLists = await storage.getCheckedList()
-  console.debug('[list-to-checklist] Checked list has been populated:', checkedLists)
 }
 
 /**
@@ -15,7 +14,6 @@ async function populateCheckedList() {
  * @returns {Boolean}
  */
 function isChecked(content) {
-  console.log(checkedLists, content)
   return checkedLists.has(content)
 }
 
