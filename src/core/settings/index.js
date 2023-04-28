@@ -15,12 +15,14 @@ async function isExtensionEnable() {
 async function setIsExtensionEnable(enable) {
   storage.setIsExtensionEnable(enable)
 
-  // Refresh all pages
+  // Reload all tabs with opted-in URLs.
   // TODO: No low level login in high level class
-  // TODO: Execute only for opted-in tabs/URL
   const allTabs = await chrome.tabs.query({})
+  const optedInURLs = await storage.getOptedInURLs()
   allTabs.forEach((tab) => {
-    chrome.tabs.reload(tab.id)
+    if (optedInURLs.find((inURL) => tab.url.startsWith(inURL)) !== undefined) {
+      chrome.tabs.reload(tab.id)
+    }
   })
 }
 
