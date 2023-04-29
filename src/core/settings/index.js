@@ -1,4 +1,5 @@
 import storage from '../storage'
+import { isURLPathSimilar } from '../utils/URLUtils'
 
 /**
  * Returns whether extension is enabled.
@@ -20,7 +21,7 @@ async function setIsExtensionEnable(enable) {
   const allTabs = await chrome.tabs.query({})
   const optedInURLs = await storage.getOptedInURLs()
   allTabs.forEach((tab) => {
-    if (optedInURLs.find((inURL) => tab.url.startsWith(inURL)) !== undefined) {
+    if (optedInURLs.find((inURL) => isURLPathSimilar(tab.url, inURL)) !== undefined) {
       chrome.tabs.reload(tab.id)
     }
   })
@@ -33,7 +34,7 @@ async function setIsExtensionEnable(enable) {
 async function isCurrentTabOptedIn() {
   const currentURL = location.href
   const optedInURLs = await storage.getOptedInURLs()
-  return optedInURLs.find((inURL) => currentURL.startsWith(inURL)) !== undefined
+  return optedInURLs.find((inURL) => isURLPathSimilar(currentURL, inURL)) !== undefined
 }
 
 /**
