@@ -1,4 +1,5 @@
 import selector from '../selector'
+import confetti from '../confetti'
 
 /**
  * Returns list of all undered list elements.
@@ -33,11 +34,14 @@ function addCheckboxTo(element) {
   element.insertBefore(checkboxElement, element.firstChild)
 
   checkboxElement.addEventListener('change', (event) => {
-    event.target.checked
-      ? selector.check(element.textContent)
-      : selector.uncheck(element.textContent)
+    const isChecked = event.target.checked
+    if (isChecked) {
+      confetti.trigger()
+    }
 
-    element.style.textDecoration = event.target.checked ? 'line-through' : ''
+    isChecked ? selector.check(element.textContent) : selector.uncheck(element.textContent)
+
+    element.style.textDecoration = isChecked ? 'line-through' : ''
   })
 }
 
