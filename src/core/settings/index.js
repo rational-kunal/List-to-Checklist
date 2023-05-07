@@ -15,16 +15,7 @@ async function isExtensionEnable() {
  */
 async function setIsExtensionEnable(enable) {
   storage.setIsExtensionEnable(enable)
-
-  // Reload all tabs with opted-in URLs.
-  // TODO: No low level login in high level class
-  const allTabs = await chrome.tabs.query({})
-  const optedInURLs = await storage.getOptedInURLs()
-  allTabs.forEach((tab) => {
-    if (optedInURLs.find((inURL) => isURLPathSimilar(tab.url, inURL)) !== undefined) {
-      chrome.tabs.reload(tab.id)
-    }
-  })
+  await reloadTabs()
 }
 
 /**
@@ -51,7 +42,25 @@ async function optedInURLs() {
  * @param {Array<String>} URLs
  */
 async function updateOptedInURL(URLs) {
+  const oldOptedInURLs = await storage.getOptedInURLs()
+
   await storage.updateOptedInURL(URLs)
+
+  const URLsToReload = URLs.concat(oldOptedInURLs)
+  reloadTabs(URLsToReload)
+}
+
+/**
+ * Reload all tabs with passed URLS OR opted in URL.
+ * @param {Array<String>} withURLs
+ */
+async function reloadTabs(withURLs = null) {
+  // TODO: No low level login in high level class
+  const URLsToReload = withURLs || (await storage.getOptedInURLs())
+  const allTabs = await chrome.tabs.query({ url: URLsToReload })
+  allTabs.forEach((tab) => {
+    chrome.tabs.reload(tab.id)
+  })
 }
 
 export default {

@@ -32,7 +32,12 @@ function App() {
   }
 
   const updateTapHandler = () => {
-    settings.updateOptedInURL(inputURLs.split(','))
+    const newOptedInURLs =
+      inputURLs
+        .split(',')
+        .map((url) => url.trim())
+        .filter((url) => url !== '') || []
+    settings.updateOptedInURL(newOptedInURLs)
     setUpdateEnabled(false)
   }
 
