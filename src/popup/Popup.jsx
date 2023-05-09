@@ -17,7 +17,7 @@ function App() {
     <DarkApp>
       <Box p={1} sx={{ width: '250px' }}>
         <Stack direction="column" spacing={1}>
-          <Typography variant="h5">List to Checklist</Typography>
+          <Typography variant="h4">List to Checklist</Typography>
 
           <Button
             variant="outlined"
@@ -28,7 +28,7 @@ function App() {
             Options
           </Button>
 
-          <Typography variant="subtitle">{version}</Typography>
+          <Typography variant="subtitle1">{version}</Typography>
         </Stack>
       </Box>
     </DarkApp>

@@ -1,4 +1,3 @@
-import '@fontsource/roboto/300.css'
 import PowerSettingsNewIcon from '@mui/icons-material/PowerSettingsNew'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -47,8 +46,12 @@ function App() {
     <DarkApp>
       <Container maxWidth="sm">
         <Box>
-          <Stack direction="column" spacing={1}>
-            <Typography variant="h1">List to Checklist</Typography>
+          <Stack direction="column" spacing={1.5}>
+
+            <Stack direction="column">
+              <Typography variant="h3" >List to Checklist</Typography>
+              <Typography variant="subtitle1" >A Chrome extension that converts all list elements into checklist elements, making it easier to keep track of tasks and progress.</Typography>
+            </Stack>
 
             <Paper elevation={1} sx={{ padding: 1 }}>
               <Button
@@ -86,7 +89,7 @@ function App() {
                 </Button>
               </Stack>
             </Paper>
-            <Typography variant="subtitle">{version}</Typography>
+            <Typography variant="subtitle1">{version}</Typography>
           </Stack>
         </Box>
       </Container>
