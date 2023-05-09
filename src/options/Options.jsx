@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography'
 import { useEffect, useState } from 'react'
 import DarkApp from '../DarkApp'
 import settings from '../core/settings'
+import SaveIcon from '@mui/icons-material/Save'
 
 function App() {
   const [isExtensionEnable, setIsExtensionEnable] = useState(false)
@@ -17,7 +18,7 @@ function App() {
 
   useEffect(() => {
     settings.optedInURLs().then((URLs) => {
-      setInputURLs(URLs.join(','))
+      setInputURLs(URLs.join(', '))
     })
 
     settings.isExtensionEnable().then((enable) => {
@@ -44,32 +45,32 @@ function App() {
 
   return (
     <DarkApp>
-      <Container maxWidth="sm">
+      <Container sx={{ marginTop: 3.5 }} maxWidth="sm">
         <Box>
           <Stack direction="column" spacing={1.5}>
-
             <Stack direction="column">
-              <Typography variant="h3" >List to Checklist</Typography>
-              <Typography variant="subtitle1" >A Chrome extension that converts all list elements into checklist elements, making it easier to keep track of tasks and progress.</Typography>
+              <Typography variant="h3">List to Checklist</Typography>
+              <Typography variant="subtitle1">
+                A Chrome extension that converts all list elements into checklist elements, making
+                it easier to keep track of tasks and progress.
+              </Typography>
             </Stack>
 
-            <Paper elevation={1} sx={{ padding: 1 }}>
-              <Button
-                variant="outlined"
-                size="large"
-                startIcon={<PowerSettingsNewIcon />}
-                color={isExtensionEnable ? 'error' : 'success'}
-                onClick={enableTapHandler}
-                fullWidth
-              >
-                {isExtensionEnable ? 'Disable' : 'Enable'}
-              </Button>
-            </Paper>
+            <Button
+              variant="outlined"
+              size="large"
+              startIcon={<PowerSettingsNewIcon />}
+              color={isExtensionEnable ? 'error' : 'success'}
+              onClick={enableTapHandler}
+              fullWidth
+            >
+              {isExtensionEnable ? 'Disable' : 'Enable'}
+            </Button>
 
-            <Paper elevation={1} sx={{ padding: 1 }}>
-              <Stack direction="column" spacing={1}>
+            <Paper elevation={1} sx={{ padding: 1.5 }} hidden={!isExtensionEnable}>
+              <Stack direction="column" spacing={1.5}>
                 <TextField
-                  label="Opted in URLs"
+                  label="Opted in URLs separated by comma"
                   multiline
                   rows={4}
                   placeholder="https://www.example.com, https://www.example2.com"
@@ -84,6 +85,7 @@ function App() {
                   size="medium"
                   onClick={updateTapHandler}
                   disabled={!updateEnabled}
+                  startIcon={<SaveIcon />}
                 >
                   Update
                 </Button>
