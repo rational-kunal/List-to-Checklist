@@ -3,7 +3,7 @@ import { defineManifest } from '@crxjs/vite-plugin'
 export default defineManifest({
   name: 'List to Checklist',
   description: 'A Chrome extension that converts all list elements into checklist elements.',
-  version: '0.2.0',
+  version: '1.0.0',
   manifest_version: 3,
   icons: {
     16: 'img/logo-16.png',
