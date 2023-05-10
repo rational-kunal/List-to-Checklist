@@ -4,7 +4,7 @@ A Chrome extension that converts all list elements into checklist elements, maki
 
 Recently, I started #100DaysOfSwift and needed a checklist to keep track of my progress. This extension solves that problem by converting list elements to checklist elements.
 
-https://user-images.githubusercontent.com/28783605/235192773-0cefd184-5076-4e20-bfae-47c6500bb4b5.mov
+![ListToChecklist](https://github.com/rational-kunal/List-to-Checklist/assets/28783605/24c25fe4-1fb3-40d1-a632-7010862f6c66)
 
 ## Installing
 
@@ -24,6 +24,7 @@ $ npm build
 - Overall switch to enable and disable extension.
 - Manual control over which websites to opt-in.
 - Check/uncheck items on the list, which will be stored locally.
+- Confetti on completing/checking task.
 
 ---
 
