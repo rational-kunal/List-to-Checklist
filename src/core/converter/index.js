@@ -1,5 +1,6 @@
 import selector from '../selector'
 import confetti from '../confetti'
+import { makeAnimatedCheckbox } from '../../checkboxes'
 
 /**
  * Returns list of all undered list elements.
@@ -23,15 +24,17 @@ function getAllListItemElements(node) {
  * @param {HTMLElement} element
  */
 function addCheckboxTo(element) {
-  const checkboxElement = document.createElement('input')
-  checkboxElement.style.marginRight = '8px'
-  checkboxElement.type = 'checkbox'
+  const originalElementTextContent = element.textContent
+  const checked = selector.isChecked(originalElementTextContent)
+  const checkboxElement = makeAnimatedCheckbox(checked)
+  checkboxElement.style.marginRight = '0.5rem'
 
-  if (selector.isChecked(element.textContent)) {
-    element.style.textDecoration = 'line-through'
-    checkboxElement.checked = selector.isChecked(element.textContent)
-  }
   element.insertBefore(checkboxElement, element.firstChild)
+
+  if (checked) {
+    element.style.textDecoration = 'line-through'
+  }
+  element.style.textDecorationColor = '#a3e583'
 
   checkboxElement.addEventListener('change', (event) => {
     const isChecked = event.target.checked
@@ -39,9 +42,12 @@ function addCheckboxTo(element) {
       confetti.trigger()
     }
 
-    isChecked ? selector.check(element.textContent) : selector.uncheck(element.textContent)
+    isChecked
+      ? selector.check(originalElementTextContent)
+      : selector.uncheck(originalElementTextContent)
 
     element.style.textDecoration = isChecked ? 'line-through' : ''
+    element.style.textDecorationColor = '#a3e583'
   })
 }
 

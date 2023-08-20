@@ -19,8 +19,8 @@ chrome.storage.local.onChanged.addListener((changes) => {
 
 // Open options page when clicked on the extension icon
 // TODO: Low level call in high level function
-chrome.action.onClicked.addListener(()=>{
-  chrome.tabs.create({url:'options.html'});
-});
+chrome.action.onClicked.addListener(() => {
+  chrome.tabs.create({ url: 'options.html' })
+})
 
 export {}
