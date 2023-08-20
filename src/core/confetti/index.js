@@ -1,7 +1,9 @@
 import Lottie from 'lottie-web'
 import confettiJson from '../../assets/confetti.json'
+import selectWav from '../../../public/select.wav'
 
 let confettiAnimation = undefined
+const selectAudio = new Audio(chrome.runtime.getURL(selectWav))
 
 function initialize() {
   // Initialize the confetti container
@@ -28,6 +30,9 @@ function initialize() {
 
 function trigger() {
   confettiAnimation.goToAndPlay(0)
+
+  selectAudio.currentTime = 0
+  selectAudio.play()
 }
 
 export default {
